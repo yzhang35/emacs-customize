@@ -1,0 +1,24 @@
+CEDET
+
+What is CEDET:
+CEDET is a Collection of Emacs Development Environment Tools written with the end goal of creating an advanced development environment in Emacs.
+
+Components of CEDET:
+EDE
+Semantic
+SRecode
+Cogre
+Speedbar
+EIEIO
+
+Comparative:
+Microsoft's Visual Studio; JBuilder, or Eclipse.
+
+How to install:
+
+How to automatic enable it:
+
+How to use it:
+
+Semantic:
+semantic is a program for Emacs which includes, at its core, a lexer, and two compiler compilers (bovinator and wisent). The core utility is the parser infrastructure which allows different types of parsers to be linked into the system. 
