@@ -2,3 +2,5 @@ How to install EMACS
 
 1) Download the tar file from official website: http://www.gnu.org/software/emacs/emacs.html
 2) Check the README and INSTALL file and install it following the instructions.
+(./configure --prefix=/home/img/installs/emacs
+make && make install)
