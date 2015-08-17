@@ -1,2 +1,21 @@
 An Introduction to Programming in Emacs Lisp
 http://www.gnu.org/software/emacs/manual/eintr.html
+
+Symbol References (Source code TAGGING system)
+
+GNU Global vs. ID Utils vs. Cscope
+
+ggtags
+
+IDE (cedet vs. ecb)
+
+Auto-complete
+
+Doxygen Documentation
+
+How to install packages:
+1) M-x list-packages
+2) Select (PACKAGE_NAME)
+3) Select Install.
+4) Use M-x list-packages to check install status.
+
