@@ -1,12 +1,18 @@
 GNU_Global
 
 What is GNU Global:
-It is a source code tagging system.
+It is a source code tagging system. It is editor independent.
 
 Comparative:
 ID Utils; Cscope
 
 How to install:
+
+Install GNU global from http://www.gnu.org/software/global/download.html
+1) ./configure --prefix=/boot/common
+2) make && make install
+
+Install GNU global
 M-x list-packages
 install ggtags
 
@@ -14,6 +20,11 @@ Tutorial:
 http://www.gnu.org/software/global/globaldoc_toc.html
 
 How to automatic enable it:
+;; Auto enable ggtags mode
+(setq c++-mode-hook
+      '(lambda ()
+	 (ggtags-mode 1)
+	 ))
 
 How to build the TAGS:
 Two ways:
@@ -25,10 +36,49 @@ $ find . -type f -print >/tmp/list     # make a file set
 $ gtags -f /tmp/list
 
 How to update the TAGS:
+With the global standalone
+1) global -u (OR global -vu  #-v means verbose)
+
+Within EMACS -- Add the following code
+
+;; Enable GNU GLOBAL incremental update
+(defun gtags-root-dir ()
+  "Returns GTAGS root directory or nil if doesn't exist."
+  (with-temp-buffer
+    (if (zerop (call-process "global" nil t nil "-pr"))
+	(buffer-substring (point-min) (1- (point-max)))
+      nil)))
+
+(defun gtags-update ()
+  "Make GTAGS incremental update"
+  (call-process "global" nil nil nil "-u"))
+
+(defun gtags-update-hook ()
+  (when (gtags-root-dir)
+    (gtags-update)))
+
+(add-hook 'after-save-hook #'gtags-update-hook)
 
 
-How to use it:
+Including tags in lib directories:
 
+If you want to locate symbols that are not defined in the source tree, then you can specify library directories with GTAGSLIBPATH environment variable.
+You should execute gtags(1) at each directory in the GTAGSLIBPATH. If ¡®GTAGS¡¯ is not found there, global ignores such directories.
 
+$ pwd
+/develop/src/mh                 # this is a source project
+$ gtags
+$ ls G*TAGS
+GRTAGS  GTAGS
+$ global mhl
+uip/mhlsbr.c                    # mhl() is found
+$ global strlen                 # strlen() is not found
+$ (cd /usr/src/lib; gtags)      # library source
+$ (cd /usr/src/sys; gtags)      # kernel source
+$ export GTAGSLIBPATH=/usr/src/lib:/usr/src/sys
+$ global strlen
+../../../usr/src/lib/libc/string/strlen.c  # found in library
+$ global access
+../../../usr/src/sys/kern/vfs_syscalls.c   # found in kernel
 
-http://www.tuicool.com/articles/RbINZ3
+How to use it in EMACS:
