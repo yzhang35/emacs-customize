@@ -4,7 +4,7 @@ What is GNU Global:
 It is a source code tagging system. It is editor independent.
 
 Comparative:
-ID Utils; Cscope
+ID Utils; Cscope; etags
 
 How to install:
 
@@ -21,10 +21,10 @@ http://www.gnu.org/software/global/globaldoc_toc.html
 
 How to automatic enable it:
 ;; Auto enable ggtags mode
-(setq c++-mode-hook
-      '(lambda ()
-	 (ggtags-mode 1)
-	 ))
+(add-hook 'c-mode-common-hook
+	  (lambda ()
+	    (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+	      (ggtags-mode 1))))
 
 How to build the TAGS:
 Two ways:
@@ -59,11 +59,12 @@ Within EMACS -- Add the following code
 
 (add-hook 'after-save-hook #'gtags-update-hook)
 
+Refer: http://emacswiki.org/emacs/GnuGlobal
 
 Including tags in lib directories:
 
 If you want to locate symbols that are not defined in the source tree, then you can specify library directories with GTAGSLIBPATH environment variable.
-You should execute gtags(1) at each directory in the GTAGSLIBPATH. If ¡®GTAGS¡¯ is not found there, global ignores such directories.
+You should execute gtags(1) at each directory in the GTAGSLIBPATH. If 'GTAGS' is not found there, global ignores such directories.
 
 $ pwd
 /develop/src/mh                 # this is a source project
@@ -82,3 +83,9 @@ $ global access
 ../../../usr/src/sys/kern/vfs_syscalls.c   # found in kernel
 
 How to use it in EMACS:
+https://github.com/leoliu/ggtags
+
+some key shortcuts:
+ggtags-find-tag-dwim If point is at a definition tag, find references, and vice versa. If point is at a line that matches ggtags-include-pattern, find the include file instead.
+ggtags-find-file Find a file from all the files indexed by gtags.
+ggtags-query-replace Do a query replace in all files found in a search.
