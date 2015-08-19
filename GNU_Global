@@ -89,3 +89,17 @@ some key shortcuts:
 ggtags-find-tag-dwim If point is at a definition tag, find references, and vice versa. If point is at a line that matches ggtags-include-pattern, find the include file instead.
 ggtags-find-file Find a file from all the files indexed by gtags.
 ggtags-query-replace Do a query replace in all files found in a search.
+
+Handling multiple matches:
+M-n Move to the next match.
+M-p Move to the previous match.
+M-} Move to next file.
+M-{ Move to previous file.
+M-= Move to the file where navigation session starts.
+M-< Move to the first match.
+M-> Move to the last match.
+M-* Abort and go back to the location where the search was started.
+
+C-M-s or M-s s Use isearch to find the match.
+RET Found the right match so exit navigation mode. Resumable by M-, (tags-loop-continue).
+
