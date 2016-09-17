@@ -1,4 +1,0 @@
-EMACS TAGS
-
-M-. Find first definition of tag (find-tag).
-M-* Allow you to retrace your steps to a depth determined by the variable find-tag-marker-ring-length.
